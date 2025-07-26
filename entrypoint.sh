@@ -25,14 +25,16 @@ fi
 
 # Create configuration file
 CONFIG_FILE=/opt/nezha-agent/config.yml
-UUID=$(uuidgen)
+if [ -z "${CONFIG_FILE}" ]; then
+    UUID=$(uuidgen)
 
-cat << EOF > $CONFIG_FILE
-client_secret: ${SECRET}
-server: '${SERVER}'
-tls: ${TLS}
-uuid: ${UUID}
-EOF
+    cat <<- EOF > $CONFIG_FILE
+        client_secret: ${SECRET}
+        server: '${SERVER}'
+        tls: ${TLS}
+        uuid: ${UUID}
+    EOF
+fi
 
 # Start the Nezha Agent
 exec /usr/local/bin/nezha-agent -c=$CONFIG_FILE
