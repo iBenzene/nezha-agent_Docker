@@ -11,6 +11,7 @@ RUN env CGO_ENABLED=0 \
 FROM debian:12-slim
 
 # Copy the binary from the builder stage
+RUN apt-get update && apt-get install -y uuid-runtime
 COPY --from=builder /root/agent/cmd/agent/agent /usr/local/bin/nezha-agent
 
 # Copy the entrypoint script
