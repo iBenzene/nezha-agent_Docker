@@ -8,10 +8,10 @@ RUN env CGO_ENABLED=0 \
     go build -v -trimpath -ldflags \
     "-s -w -X github.com/nezhahq/agent/pkg/monitor.Version=1.13.0"
 
-FROM debian:12-slim
+FROM alpine
 
 # Copy the binary from the builder stage
-RUN apt-get update && apt-get install -y uuid-runtime
+RUN apk add --no-cache util-linux
 COPY --from=builder /root/agent/cmd/agent/agent /usr/local/bin/nezha-agent
 
 # Copy the entrypoint script

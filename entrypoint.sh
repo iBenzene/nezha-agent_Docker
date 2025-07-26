@@ -12,7 +12,6 @@ fi
 
 # Modified OS information
 if [ -n "${OS}" ] || [ -n "${OS_VERSION}" ]; then
-    rm -f /etc/debian_version
     if [ -n "${OS}" ]; then
         sed -i "s/^ID=.*/ID=${OS}/" /etc/os-release
     fi
