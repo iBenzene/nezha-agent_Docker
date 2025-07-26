@@ -12,12 +12,13 @@ fi
 
 # Modified OS information
 if [ -n "${OS}" ] || [ -n "${OS_VERSION}" ]; then
+    rm -rf /etc/alpine-release
     if [ -n "${OS}" ]; then
         sed -i "s/^ID=.*/ID=${OS}/" /etc/os-release
     fi
 
     if [ -n "${OS_VERSION}" ]; then
-        sed -i "s/^VERSION=.*/VERSION=${OS_VERSION}/" /etc/os-release
+        sed -i "s/^VERSION_ID=.*/VERSION_ID=${OS_VERSION}/" /etc/os-release
     fi
 fi
 
