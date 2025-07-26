@@ -1,4 +1,4 @@
-name: Docker
+name: Publish Docker Image
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -13,13 +13,11 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: nezha-agent
   VERSION: ${{ github.ref_name }}
-
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
