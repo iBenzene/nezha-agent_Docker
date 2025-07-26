@@ -23,17 +23,17 @@ if [ -n "${OS}" ] || [ -n "${OS_VERSION}" ]; then
     fi
 fi
 
-# Create configuration file
+# Create configuration file if it does not exist
 CONFIG_FILE=/opt/nezha-agent/config.yml
-if [ -z "${CONFIG_FILE}" ]; then
+if [ ! -f "${CONFIG_FILE}" ]; then
     UUID=$(uuidgen)
 
-    cat <<- EOF > $CONFIG_FILE
-        client_secret: ${SECRET}
-        server: '${SERVER}'
-        tls: ${TLS}
-        uuid: ${UUID}
-    EOF
+    cat << EOF > $CONFIG_FILE
+client_secret: ${SECRET}
+server: '${SERVER}'
+tls: ${TLS}
+uuid: ${UUID}
+EOF
 fi
 
 # Start the Nezha Agent
