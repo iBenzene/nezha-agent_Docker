@@ -6,6 +6,7 @@ if [ -z "${SECRET}" ] && [ -z "${SERVER}" ]; then
     exit 1
 fi
 
+# Default not to use TLS
 if [ -z "${TLS}" ]; then
     TLS=false
 fi
