@@ -18,7 +18,7 @@ sudo docker run -d -v=./nezha-agent:/opt/nezha-agent \
     ghcr.io/ibenzene/nezha-agent
 ```
 
-## Docker Compose
+或者
 
 ``` yaml
 services:
