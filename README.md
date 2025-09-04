@@ -15,7 +15,7 @@ sudo docker run -d -v=./nezha-agent:/opt/nezha-agent \
     -e SECRET=your_client_secret \
     -e SERVER=example.com:443 \
     -e TLS=true \
-    ghcr.io/ibenzene/nezha-agent:1.13.1
+    ghcr.io/ibenzene/nezha-agent
 ```
 
 或者
@@ -23,7 +23,7 @@ sudo docker run -d -v=./nezha-agent:/opt/nezha-agent \
 ``` yaml
 services:
   agent:
-    image: ghcr.io/ibenzene/nezha-agent:1.13.1
+    image: ghcr.io/ibenzene/nezha-agent
     container_name: nezha-agent
     restart: unless-stopped
     network_mode: host
@@ -41,12 +41,12 @@ services:
 
 ### 启用 GPU 监控
 
-由于 NVIDIA 驱动是基于 GUN libc 构建的，而 Alpine Linux 使用的是 musl libc，因此如果要启用 GPU 监控功能的话，请使用基于 Debian 构建的镜像。
+⚠️ 由于 NVIDIA 驱动是基于 GUN libc 构建的，而 Alpine Linux 使用的是 musl libc，因此如果要启用 GPU 监控功能的话，请使用基于 Debian 构建的镜像。
 
 ``` yaml
 services:
   agent:
-    image: ghcr.io/ibenzene/nezha-agent:1.13.1-debian
+    image: ghcr.io/ibenzene/nezha-agent:debian
     container_name: nezha-agent
     restart: unless-stopped
     network_mode: host
