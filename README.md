@@ -39,7 +39,7 @@ services:
       - NET_RAW
 ```
 
-## 特别说明
+### 启用 GPU 监控
 
 由于 NVIDIA 驱动是基于 GUN libc 构建的，而 Alpine Linux 使用的是 musl libc，因此如果要启用 GPU 监控功能的话，请使用基于 Debian 构建的镜像。
 
