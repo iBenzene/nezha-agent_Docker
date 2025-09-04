@@ -61,6 +61,7 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ${{ steps.meta.outputs.tags }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:alpine
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}-alpine
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
@@ -68,7 +69,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           build-args: VERSION=${{ env.VERSION }}
           provenance: false
-      
+
       - name: Build and push Docker image (debian)
         id: build-debian
         uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
@@ -76,7 +77,9 @@ jobs:
           context: .
           target: debian
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}-debian
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:debian
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}-debian
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -90,6 +93,7 @@ jobs:
         env:
           TAGS: |
             ${{ steps.meta.outputs.tags }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:alpine
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}-alpine
           DIGEST: ${{ steps.build-alpine.outputs.digest }}
         run: |
@@ -98,7 +102,9 @@ jobs:
       - name: Sign the published Docker image (debian)
         if: ${{ github.event_name != 'pull_request' }}
         env:
-          TAGS: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}-debian
+          TAGS: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:debian
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}-debian
           DIGEST: ${{ steps.build-debian.outputs.digest }}
         run: |
           echo "$TAGS" | tr ',' '\n' | xargs -I {} cosign sign --yes {}@${DIGEST}
