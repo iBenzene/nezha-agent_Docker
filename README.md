@@ -15,7 +15,7 @@ sudo docker run -d -v=./nezha-agent:/opt/nezha-agent \
     -e SECRET=your_client_secret \
     -e SERVER=example.com:443 \
     -e TLS=true \
-    ghcr.io/ibenzene/nezha-agent
+    ghcr.io/ibenzene/nezha-agent:1.13.1
 ```
 
 或者
@@ -23,7 +23,7 @@ sudo docker run -d -v=./nezha-agent:/opt/nezha-agent \
 ``` yaml
 services:
   agent:
-    image: ghcr.io/ibenzene/nezha-agent
+    image: ghcr.io/ibenzene/nezha-agent:1.13.1
     container_name: nezha-agent
     restart: unless-stopped
     network_mode: host
@@ -46,7 +46,7 @@ services:
 ``` yaml
 services:
   agent:
-    image: ghcr.io/ibenzene/nezha-agent:debian
+    image: ghcr.io/ibenzene/nezha-agent:1.13.1-debian
     container_name: nezha-agent
     restart: unless-stopped
     network_mode: host
